@@ -1,21 +1,553 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cody Warmbo</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-    </head>
-    <body>
-        <div class="page-container">
-            <div class="content-box">
-                <img src="avatar-2024.jpg">
-                <h1>Cody Warmbo</h1>
-                <p>Hello and welcome! I am a <a href="/page/my-desk.html">tech enthusiast</a> from Minnesota in the United States. I currently am <a href="/page/python.html">learning Python</a> for a programming language, while also working to expand my <a href="/page/web.html">web design and coding</a> abilities.</p>
-                <p>My skills and hobbies align more often than not, as I spend most of my time learning and playing with <a href="/page/homelab.html">my homelab</a> and the myriad of <a href="/page/services.html">services I run</a> within it. My leisure and entertainment comes from <a href="/page/my-pc.html">PC gaming</a> with family and friends. Lately I've been spending time in VR to get <a href="/page/beat-saber.html">my exercise</a>.</p>
-                <p>I own and operate <a href="https://warmbo.com">Warmbo LLC</a>, help manage a <a href="https://zenhawx.org">gaming clan</a>, produce <a href="https://youtube.com/">different</a> </a href="https://youtube.com/">channels</a> on YouTube, and have <a href="/page/cats.html">3 cats</a>.</p>
-                <p>You can find me on <a href="https://zenhawx.org/discord">Discord</a>, <a href="https://steamcommunity.com/profiles/76561197969424478">Steam</a>, <a href="https://github.com/warmbo">GitHub</a>, <a href="https://www.youtube.com/@lighthawk95">YouTube</a>, or just <a href="mailto:cody@warmbo.com">email me</a>.</p>
-            </div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Performance Animated Background</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Share+Tech&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Barlow', Arial, sans-serif;
+            background: #000428;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120vw;
+            height: 120vh;
+            z-index: -1;
+            will-change: transform;
+            image-rendering: pixelated;
+            filter: blur(2px);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+            color: #e1f5fe;
+            
+            /* Centering */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            /* Glassmorphic black container */
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+            
+            /* Container sizing */
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            
+            /* Glass effect refinements */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 30px;
+        }
+
+        .title-section {
+            text-align: left;
+            flex: 1;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .content h1 {
+            font-family: 'Share Tech', 'Barlow', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .content h2 {
+            font-family: 'Barlow', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            opacity: 0.8;
+            font-weight: 300;
+            color: #81d4fa;
+            letter-spacing: 0.05em;
+        }
+
+        .content p {
+            font-family: 'Barlow', sans-serif;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: left;
+            font-weight: 300;
+        }
+
+        .social-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-links p {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .link-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: #e1f5fe;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-item i {
+            font-size: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .header-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .title-section {
+                text-align: center;
+            }
+
+            .content h1 {
+                font-size: 2rem;
+            }
+
+            .content h2 {
+                font-size: 1rem;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .links {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                max-width: 300px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bgCanvas { display: none; }
+            body { background: linear-gradient(135deg, #000428, #0d47a1); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bgCanvas"></canvas>
+    
+    <div class="content">
+        <div class="content-container">
+            <div class="header-section">
+                <div class="title-section">
+                    <h1>Cody Warmbo</h1>
+                    <h2>Developer & Systems Administrator</h2>
+                </div>
+                <div class="avatar">
+                    <img src="ava2.png" alt="Cody Warmbo Avatar">
+                </div>
+            </div>
+            
+            <p>Technology professional from Minnesota specializing in Python development, web design, and infrastructure automation. I solve complex technical challenges and optimize processes for maximum efficiency.</p>
+            
+            <p>Expert in Windows Server environments, Debian Linux administration, and PowerShell automation. I architect homelab ecosystems, manage network troubleshooting (DHCP, DNS), and create scalable solutions from development to deployment.</p>
+            
+            <p>Founder of Warmbo LLC with proven leadership in technical teams and helpdesk operations. Experienced in remote troubleshooting, system recovery, documentation, and enterprise implementations. I thrive in fast-paced environments that demand continuous learning and innovation.</p>
+            
+            <div class="social-links">
+                <p>You can find me on:</p>
+                <div class="links">
+                    <a href="#" class="link-item">
+                        <i class="fab fa-discord"></i>
+                        Discord
+                    </a>
+                    <a href="#" class="link-item">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a href="#" class="link-item">
+                        <i class="fab fa-steam"></i>
+                        Steam
+                    </a>
+                    <a href="#" class="link-item">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="#" class="link-item">
+                        <i class="fab fa-youtube"></i>
+                        YouTube
+                    </a>
+                    <a href="mailto:" class="link-item">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </a>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+
+    <script>
+        'use strict';
+        
+        class UltraPerformanceBackground {
+            constructor() {
+                this.canvas = document.getElementById('bgCanvas');
+                
+                // Ultra-aggressive performance context
+                this.ctx = this.canvas.getContext('2d', { 
+                    alpha: false,
+                    desynchronized: true,
+                    powerPreference: 'high-performance',
+                    willReadFrequently: false,
+                    antialias: false
+                });
+                
+                this.init();
+                this.precompute();
+                this.run();
+            }
+            
+            init() {
+                // Minimal properties
+                this.w = window.innerWidth;
+                this.h = window.innerHeight;
+                this.t = 0;
+                this.visible = true;
+                this.id = null;
+                
+                // Detect device performance
+                const mobile = /Mobi|Android/i.test(navigator.userAgent);
+                const lowEnd = this.w < 1024 || mobile || navigator.hardwareConcurrency < 4;
+                
+                // Ultra-aggressive settings
+                this.cfg = {
+                    scale: lowEnd ? 1.1 : 1.2, // Reduced overscan
+                    bokeh: lowEnd ? 2 : 3,     // Minimal bokeh
+                    quality: lowEnd ? 0.5 : 0.75, // Lower resolution
+                    fps: lowEnd ? 30 : 60,     // Target FPS
+                    skip: lowEnd ? 2 : 1       // Frame skipping
+                };
+                
+                this.setupCanvas();
+                this.frame = 0;
+            }
+            
+            setupCanvas() {
+                const w = this.w * this.cfg.scale;
+                const h = this.h * this.cfg.scale;
+                const q = this.cfg.quality;
+                
+                this.canvas.width = w * q;
+                this.canvas.height = h * q;
+                this.canvas.style.width = w + 'px';
+                this.canvas.style.height = h + 'px';
+                
+                this.ctx.scale(q, q);
+                this.ctx.imageSmoothingEnabled = false; // Disable for speed
+                
+                this.rw = w;
+                this.rh = h;
+                this.cx = w * 0.5;
+                this.cy = h * 0.5;
+            }
+            
+            precompute() {
+                // Two intersecting radial gradients for background
+                this.bg1 = this.ctx.createRadialGradient(
+                    this.cx * 0.3, this.cy * 0.3, 0,
+                    this.cx * 0.3, this.cy * 0.3, this.rw * 0.8
+                );
+                this.bg1.addColorStop(0, 'rgba(0, 2, 20, 0.9)');
+                this.bg1.addColorStop(0.3, 'rgba(0, 41, 102, 0.8)');
+                this.bg1.addColorStop(0.6, 'rgba(0, 128, 255, 0.6)');
+                this.bg1.addColorStop(1, 'rgba(179, 217, 255, 0.3)');
+                
+                this.bg2 = this.ctx.createRadialGradient(
+                    this.cx * 1.7, this.cy * 1.7, 0,
+                    this.cx * 1.7, this.cy * 1.7, this.rw * 0.9
+                );
+                this.bg2.addColorStop(0, 'rgba(20, 45, 81, 0.8)');
+                this.bg2.addColorStop(0.3, 'rgba(13, 71, 161, 0.7)');
+                this.bg2.addColorStop(0.6, 'rgba(26, 140, 255, 0.5)');
+                this.bg2.addColorStop(1, 'rgba(129, 212, 250, 0.2)');
+                
+                // Base solid background
+                this.baseBg = this.ctx.createLinearGradient(0, 0, this.rw, this.rh);
+                this.baseBg.addColorStop(0, '#000214');
+                this.baseBg.addColorStop(1, '#001a4d');
+                
+                // Minimal wave gradient
+                this.wave = this.ctx.createRadialGradient(
+                    this.cx, this.cy, 0, this.cx, this.cy, this.rw * 0.8
+                );
+                this.wave.addColorStop(0, 'rgba(80,136,248,0.1)');
+                this.wave.addColorStop(1, 'transparent');
+                
+                // Pre-calculated bokeh positions
+                this.bokeh = [];
+                const pos = [[0.3, 0.3], [0.7, 0.7], [0.5, 0.5]];
+                for (let i = 0; i < this.cfg.bokeh; i++) {
+                    const [x, y] = pos[i] || [Math.random(), Math.random()];
+                    this.bokeh.push({
+                        x: x * this.rw,
+                        y: y * this.rh,
+                        s: 200 + Math.random() * 100,
+                        o: 0.1 + Math.random() * 0.1,
+                        p: Math.random() * 6.28,
+                        r: 50 + Math.random() * 30
+                    });
+                }
+                
+                // Pre-compute sine/cosine lookup tables
+                this.sinTable = [];
+                this.cosTable = [];
+                for (let i = 0; i < 360; i++) {
+                    const rad = (i * Math.PI) / 180;
+                    this.sinTable[i] = Math.sin(rad);
+                    this.cosTable[i] = Math.cos(rad);
+                }
+            }
+            
+            fastSin(angle) {
+                return this.sinTable[Math.floor(Math.abs(angle * 57.2958)) % 360] || 0;
+            }
+            
+            fastCos(angle) {
+                return this.cosTable[Math.floor(Math.abs(angle * 57.2958)) % 360] || 0;
+            }
+            
+            drawBg() {
+                // Base solid background
+                this.ctx.fillStyle = this.baseBg;
+                this.ctx.fillRect(0, 0, this.rw, this.rh);
+                
+                // First radial gradient - clockwise rotation (much larger scaling)
+                const rot1 = this.t * 0.0001;
+                this.ctx.save();
+                this.ctx.translate(this.cx, this.cy);
+                this.ctx.rotate(rot1);
+                this.ctx.scale(2.2, 2.2); // Increased from 1.5 to 2.2 for full coverage
+                this.ctx.translate(-this.cx, -this.cy);
+                this.ctx.fillStyle = this.bg1;
+                this.ctx.fillRect(0, 0, this.rw, this.rh);
+                this.ctx.restore();
+                
+                // Second radial gradient - counter-clockwise rotation (much larger scaling)
+                const rot2 = this.t * -0.00007;
+                this.ctx.save();
+                this.ctx.translate(this.cx, this.cy);
+                this.ctx.rotate(rot2);
+                this.ctx.scale(2.4, 2.4); // Increased from 1.625 to 2.4 for full coverage
+                this.ctx.translate(-this.cx, -this.cy);
+                this.ctx.globalCompositeOperation = 'multiply';
+                this.ctx.fillStyle = this.bg2;
+                this.ctx.fillRect(0, 0, this.rw, this.rh);
+                this.ctx.restore();
+                
+                // Reset composite operation
+                this.ctx.globalCompositeOperation = 'source-over';
+            }
+            
+            drawWave() {
+                // Single wave layer
+                this.ctx.globalCompositeOperation = 'screen';
+                this.ctx.save();
+                
+                const wt = this.t * 0.0005; // Slowed from 0.001 to 0.0005
+                const ox = this.fastSin(wt) * 30;
+                const oy = this.fastCos(wt * 0.7) * 20;
+                
+                this.ctx.translate(this.cx + ox, this.cy + oy);
+                this.ctx.globalAlpha = 0.4;
+                this.ctx.fillStyle = this.wave;
+                this.ctx.fillRect(-this.rw, -this.rh, this.rw * 2, this.rh * 2);
+                this.ctx.restore();
+                this.ctx.globalCompositeOperation = 'source-over';
+            }
+            
+            drawBokeh() {
+                this.ctx.globalCompositeOperation = 'screen';
+                
+                for (let i = 0; i < this.bokeh.length; i++) {
+                    const b = this.bokeh[i];
+                    
+                    // Fast position update
+                    const ot = this.t * 0.0015 + b.p; // Slowed from 0.003 to 0.0015
+                    const ox = this.fastSin(ot) * b.r;
+                    const oy = this.fastCos(ot * 0.7) * b.r;
+                    
+                    const x = b.x + ox;
+                    const y = b.y + oy;
+                    const size = b.s * (1 + this.fastSin(this.t * 0.002 + i) * 0.2); // Slowed from 0.005 to 0.002
+                    
+                    // Single gradient per bokeh
+                    const g = this.ctx.createRadialGradient(x, y, 0, x, y, size * 0.6);
+                    g.addColorStop(0, `rgba(255,255,255,${b.o})`);
+                    g.addColorStop(0.3, `rgba(200,230,255,${b.o * 0.5})`);
+                    g.addColorStop(1, 'transparent');
+                    
+                    this.ctx.fillStyle = g;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, size * 0.6, 0, 6.28);
+                    this.ctx.fill();
+                }
+                
+                this.ctx.globalCompositeOperation = 'source-over';
+            }
+            
+            render() {
+                // Frame skipping for low-end devices
+                if (++this.frame % this.cfg.skip !== 0) return;
+                
+                // Ultra-fast clear
+                this.ctx.clearRect(0, 0, this.rw, this.rh);
+                
+                this.drawBg();
+                this.drawWave();
+                this.drawBokeh();
+            }
+            
+            animate() {
+                if (!this.visible) {
+                    this.id = requestAnimationFrame(() => this.animate());
+                    return;
+                }
+                
+                this.t += 16.67; // Fixed time step
+                
+                // Time reset to prevent overflow
+                if (this.t > 1000000) this.t = 0;
+                
+                this.render();
+                this.id = requestAnimationFrame(() => this.animate());
+            }
+            
+            run() {
+                // Reduced motion check
+                if (matchMedia('(prefers-reduced-motion)').matches) return;
+                
+                // Visibility handling
+                document.addEventListener('visibilitychange', () => {
+                    this.visible = !document.hidden;
+                });
+                
+                // Minimal resize handling
+                let timeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        this.w = window.innerWidth;
+                        this.h = window.innerHeight;
+                        this.setupCanvas();
+                        this.precompute();
+                    }, 200);
+                });
+                
+                this.animate();
+            }
+            
+            destroy() {
+                if (this.id) cancelAnimationFrame(this.id);
+            }
+        }
+        
+        // Ultra-minimal initialization
+        let bg;
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => bg = new UltraPerformanceBackground());
+        } else {
+            bg = new UltraPerformanceBackground();
+        }
+        
+        // Cleanup
+        window.addEventListener('beforeunload', () => bg?.destroy());
+    </script>
+</body>
 </html>
